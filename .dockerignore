@@ -6,3 +6,4 @@ node_modules
 .dockerignore
 Dockerfile
 .gitignore
+docker-compose.yml
