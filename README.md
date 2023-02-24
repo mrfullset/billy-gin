@@ -48,14 +48,16 @@ hosts:
 
 ## Usage
 
-Do a `POST /toggle` request with following body:
-```json
-{
-  "secret": "supersecret"
-}
+Do a `POST /toggle` request with `Authorization` header:
+```
+Authorization: Bearer supersecret
 ```
 That's it. You have seamlessly swapped two
 containers.
+
+Also you'd be interested in following endpoints:
+
+- `GET /blue` - get current blue proxy info
 
 ## Setup
 
