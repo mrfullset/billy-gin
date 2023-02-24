@@ -5,18 +5,18 @@ import express, { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
 import { getHosts, getToken, updateHost } from "./api";
 import getTargetHosts from "./util/getTargetHosts";
+import validateSecret from "./util/validateSecret";
 
 const app: Express = express();
 app.use(bodyParser.json());
 
 const port = parseInt(process.env.PORT ?? "3000");
 const host = process.env.HOST ?? "localhost";
-const secret = process.env.SECRET!;
 
 app.post(
   "/toggle",
   async (req: Request<{}, {}, ToggleRequest>, res: Response) => {
-    if (req.body?.secret !== secret) {
+    if (!validateSecret(req)) {
       res.status(401).send();
       return;
     }
