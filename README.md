@@ -58,6 +58,7 @@ containers.
 Also you'd be interested in following endpoints:
 
 - `GET /blue` - get current blue proxy info
+- `GET /green` - get current green proxy info
 
 ## Setup
 
