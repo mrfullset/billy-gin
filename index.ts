@@ -75,6 +75,33 @@ app.get("/blue", async (req: Request<{}, {}, ToggleRequest>, res: Response) => {
   res.send({ blue: targetHosts.blue });
 });
 
+app.get("/green", async (req: Request<{}, {}, ToggleRequest>, res: Response) => {
+  if (!validateSecret(req)) {
+    res.status(401).send();
+    return;
+  }
+
+  const token = await getToken();
+  if (!token) {
+    res.status(401).send("Bad SA");
+    return;
+  }
+
+  const hosts = await getHosts(token);
+  if (!hosts) {
+    res.status(412).send("Unable to fetch nginx proxy manager hosts");
+    return;
+  }
+
+  const targetHosts = getTargetHosts(hosts);
+  if (!targetHosts) {
+    res.status(404).send("Target hosts are not found");
+    return;
+  }
+
+  res.send({ blue: targetHosts.green });
+});
+
 app.listen(3000, host, () => {
   console.log(`⚡️[BillyGin]: Server is running at http://${host}:${port}`);
 });
