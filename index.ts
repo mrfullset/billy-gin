@@ -99,7 +99,7 @@ app.get("/green", async (req: Request<{}, {}, ToggleRequest>, res: Response) => 
     return;
   }
 
-  res.send({ blue: targetHosts.green });
+  res.send({ green: targetHosts.green });
 });
 
 app.listen(3000, host, () => {
